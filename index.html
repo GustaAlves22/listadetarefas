@@ -1,178 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comparação de Códigos - Lista de Tarefas</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0f172a;
-      color: #f1f5f9;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .tabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .tab {
-      padding: 10px 20px;
-      background-color: #1e293b;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .tab.active {
-      background-color: #3b82f6;
-      font-weight: bold;
-    }
-    .slide {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      background-color: #1e293b;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-    .slide.active {
-      display: grid;
-    }
-    .code-box {
-      background-color: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 10px;
-      overflow-x: auto;
-      white-space: pre;
-      font-family: monospace;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .title {
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    .highlight {
-      color: #22c55e;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <!-- Link para o arquivo CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  <h1>Comparação de Código - Lista de Tarefas</h1>
-
-  <div class="tabs">
-    <div class="tab active" data-tab="estrutura">Estrutura da Tarefa</div>
-    <div class="tab" data-tab="interface">Campos do Formulário</div>
-    <div class="tab" data-tab="listagem">Exibição na Lista</div>
-    <div class="tab" data-tab="filtros">Filtros e Ordenação</div>
-  </div>
-
-  <div class="slide active" id="estrutura">
-    <div>
-      <div class="title">Código Original</div>
-      <div class="code-box">
-const tarefa = {
-  id: Date.now(),
-  texto: texto,
-  completa: false,
-  dataCriacao: new Date()
-};
-      </div>
+    <div class="container">
+        <h1>Lista de Tarefas</h1>
+<div style="text-align: right; margin-top: -20px; margin-bottom: 10px;">
+    <a href="slide.html" target="_self" style="background-color: #3b82f6; color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 14px;">
+        Ver Apresentação <i class="fas fa-arrow-right"></i>
+    </a>
+    <button id="toggleDarkMode" title="Alternar modo escuro" style="margin-left: 10px;"><i class="fas fa-moon"></i></button>
+</div>
+        
+        <div class="input-container">
+            <input type="text" id="tarefa" placeholder="Digite uma nova tarefa">
+            <input type="date" id="vencimento" style="margin-left: 10px;">
+            <select id="categoria" style="margin-left: 10px;">
+                <option value="">Sem categoria</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Estudos">Estudos</option>
+                <option value="Pessoal">Pessoal</option>
+            </select>
+            <button id="adicionar">Adicionar</button>
+        </div>
+        <ul id="lista-tarefas"></ul>
+        <div id="sumario" class="sumario"></div>
+        <div class="filtros">
+            <button id="todas" class="ativo">Todas</button>
+            <button id="ativas">Ativas</button>
+            <button id="completas">Completas</button>
+            <select id="filtro-categoria">
+                <option value="">Todas categorias</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Estudos">Estudos</option>
+                <option value="Pessoal">Pessoal</option>
+            </select>
+        </div>
+        <div class="filtros" id="ordenacao">
+            <button data-ordem="texto">Ordenar por Texto</button>
+            <button data-ordem="data">Ordenar por Data</button>
+            <button data-ordem="status">Ordenar por Status</button>
+        </div>
+        <div style="margin-top: 30px;">
+            <h3>Estatísticas</h3>
+            <canvas id="graficoProporcao" width="300" height="150" style="background:#fff; border:1px solid #ccc; border-radius: 8px;"></canvas>
+            <canvas id="graficoProdutividade" width="400" height="200" style="background:#fff; border:1px solid #ccc; margin-top: 20px; border-radius: 8px;"></canvas>
+        </div>
     </div>
-    <div>
-      <div class="title">Código Atualizado</div>
-      <div class="code-box">
-const tarefa = {
-  id: Date.now(),
-  texto: texto,
-  completa: false,
-  dataCriacao: new Date(),
-  <span class="highlight">vencimento: vencimentoInput.value,</span>
-  <span class="highlight">categoria: categoriaInput.value</span>
-};
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" id="interface">
-    <div>
-      <div class="title">Interface Original</div>
-      <div class="code-box">
-<input type="text" id="tarefa" placeholder="Digite uma nova tarefa...">
-<button id="adicionar">Adicionar</button>
-      </div>
-    </div>
-    <div>
-      <div class="title">Interface Atualizada</div>
-      <div class="code-box">
-<input type="text" id="tarefa" placeholder="Tarefa...">
-<input type="date" id="vencimento">
-<input type="text" id="categoria" placeholder="Categoria">
-<button id="adicionar">Adicionar</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" id="listagem">
-    <div>
-      <div class="title">Listagem Simples</div>
-      <div class="code-box">
-<span>${tarefa.texto}</span>
-      </div>
-    </div>
-    <div>
-      <div class="title">Listagem com Detalhes</div>
-      <div class="code-box">
-<span>${tarefa.texto} - ${tarefa.categoria} - ${tarefa.vencimento}</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" id="filtros">
-    <div>
-      <div class="title">Filtros Antigos</div>
-      <div class="code-box">
-<button id="todas">Todas</button>
-<button id="ativas">Ativas</button>
-<button id="completas">Completas</button>
-      </div>
-    </div>
-    <div>
-      <div class="title">Novos Filtros e Ordenação</div>
-      <div class="code-box">
-<select id="filtroCategoria">...</select>
-<button id="ordenarTexto">Texto</button>
-<button id="ordenarData">Data</button>
-<button id="ordenarStatus">Status</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const tabs = document.querySelectorAll('.tab');
-    const slides = document.querySelectorAll('.slide');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        slides.forEach(slide => {
-          slide.classList.remove('active');
-        });
-        document.getElementById(tab.dataset.tab).classList.add('active');
-      });
-    });
-  </script>
+    <!-- Link para o arquivo JavaScript -->
+    <script src="scipt.js"></script>
 </body>
 </html>
