@@ -1,0 +1,223 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333;
+    --primary: #4caf50;
+    --primary-dark: #388e3c;
+    --card-bg: #f9f9f9;
+    --hover-bg: #f0f0f0;
+    --border: #ccc;
+}
+
+body.dark-mode {
+    --bg-color: #1e1e1e;
+    --text-color: #000000;
+    --primary: #00ff0d;
+    --primary-dark: #00ff08;
+    --card-bg: #2b2b2b;
+    --hover-bg: #383838;
+    --border: #555;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px 25px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-size: 2em;
+    animation: fadeIn 0.6s ease;
+}
+
+#toggleDarkMode {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+#toggleDarkMode:hover {
+    transform: scale(1.2);
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    animation: fadeInUp 0.6s ease;
+}
+
+.input-container input[type="text"],
+.input-container input[type="date"],
+.input-container select {
+    flex: 1 1 auto;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+#adicionar {
+    padding: 10px 16px;
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.2s;
+}
+#adicionar:hover {
+    transform: scale(1.05);
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    transition: background-color 0.3s, transform 0.2s;
+    animation: fadeInUp 0.4s ease;
+}
+
+li:hover {
+    background-color: var(--hover-bg);
+    transform: translateY(-2px);
+}
+
+li.completa {
+    text-decoration: line-through;
+    opacity: 0.6;
+    background-color: var(--hover-bg);
+}
+
+.acoes {
+    display: flex;
+    gap: 8px;
+}
+
+.completar, .remover {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.completar {
+    background-color: #00ff84;
+    color: rgb(0, 0, 0);
+}
+.completar:hover {
+    background-color: #168e04c4;
+}
+.remover {
+    background-color: #f44336;
+    color: rgb(0, 0, 0);
+}
+.remover:hover {
+    background-color: #d32f2f;
+}
+
+.sumario {
+    margin-top: 20px;
+    padding: 16px;
+    background-color: var(--hover-bg);
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.filtros button {
+    padding: 8px 14px;
+    background-color: #dcdcdc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+body.dark-mode .filtros button {
+    background-color: #444;
+    color: white;
+}
+.filtros button:hover,
+.filtros button.ativo {
+    background-color: #c0c0c0;
+    font-weight: bold;
+    transform: scale(1.05);
+}
+body.dark-mode .filtros button:hover {
+    background-color: #666;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: var(--bg-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Animações */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
